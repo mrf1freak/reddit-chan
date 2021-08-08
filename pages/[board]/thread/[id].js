@@ -56,13 +56,13 @@ export default function Home() {
     }
 
     function OPImage(){
-        if(typeof posts[OP_ID] === 'undefined') return null
-
         const post = posts[OP_ID]
         return <Image src={`https://i.4cdn.org/${BOARD}/${post['tim']}s.jpg`} width={post['tn_w']} height={post['tn_h']} alt="OP thumbnail" />
     }
 
     function OP(){
+        if(typeof posts[OP_ID] === 'undefined') return null
+
         return <div className="mb-16 p-3 flex flex-col justify-center items-center bg-white rounded">
             <h2 className="text-xl">
                 <div dangerouslySetInnerHTML={{__html: OPText()}} className="p-4 mb-16" />
