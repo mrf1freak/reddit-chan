@@ -11,9 +11,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "cachios": "^3.0.0",
+    "moment": "^2.29.1",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.1",

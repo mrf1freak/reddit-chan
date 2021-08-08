@@ -16,4 +16,12 @@ export async function getThread(board, id){
     return {replies, posts: dictionary}
 }
 
+export async function getCatalog(board){
+    const {data} = await cachios.get(`https://a.4cdn.org/${board}/catalog.json`, {
+        ttl: 300
+    })
+
+    return data.reduce((accumulator, current) => accumulator.concat(current.threads), [])
+}
+
 

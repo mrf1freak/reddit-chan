@@ -55,7 +55,6 @@ function isReplyLink(link){
 function addReplies(replies, replyIDs, reply, id) {
     if(reply === '') return false
     for (let i = 0; i < replyIDs.length; i++) {
-        console.log(id, replyIDs[i])
         if(replyIDs[i] === id) continue
 
         if(!(replyIDs[i] in replies)) replies[replyIDs[i]] = []

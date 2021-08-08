@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-blue-50
+}
+
 span.quote {
     @apply text-green-600
 }
