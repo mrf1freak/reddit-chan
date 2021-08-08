@@ -24,4 +24,10 @@ export async function getCatalog(board){
     return data.reduce((accumulator, current) => accumulator.concat(current.threads), [])
 }
 
+export async function getBoards(){
+    const {data} = await cachios.get(`https://a.4cdn.org/boards.json`, {
+        ttl: 500
+    })
 
+    return data['boards']
+}
