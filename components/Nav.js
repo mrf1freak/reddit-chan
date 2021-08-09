@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import Link from 'next/link'
 import {getBoards} from "utils/api";
 
 
@@ -53,12 +54,14 @@ export default function Nav(){
 
     return (
         <nav className="flex items-center bg-white shadow p-4">
-            <div className="flex flex-1 text-xl font-semibold">RedditChan</div>
+            <Link href="/">
+                <a className="flex text-xl font-semibold md:flex-1 pr-3">RedditChan</a>
+            </Link>
             <div className="relative flex flex-1 justify-center items-stretch">
                 <input type="text" name="" id="" className="flex flex-1 p-2 bg-gray-100 focus:bg-white" placeholder="Search Boards" title={search} onChange={e => setSearch(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setTimeout(() => setFocus(false), 250)}/>
                 <Boards />
             </div>
-            <div className="flex flex-1">
+            <div className="flex flex-1 hidden md:block">
 
             </div>
         </nav>
