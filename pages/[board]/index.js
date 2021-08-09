@@ -1,8 +1,10 @@
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import PostThumbnailImage from "components/post/PostThumbnailImage";
 import moment from "moment";
+
+import Page from 'components/Page'
+import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
 
 export default function Catalog(){
@@ -50,10 +52,10 @@ export default function Catalog(){
     }, [board])
 
     return (
-        <div>
+        <Page>
             {
                 threads.map(thread => <Thread key={thread['md5']} thread={thread} />)
             }
-        </div>
+        </Page>
     )
 }

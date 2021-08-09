@@ -4,7 +4,7 @@ import axios from "axios";
 import {useRouter} from "next/router";
 import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
-import Nav from "components/Nav"
+import Page from "components/Page";
 
 export default function Home() {
     const router = useRouter()
@@ -92,17 +92,13 @@ export default function Home() {
     }, [BOARD, OP_ID])
 
     return (
-        <div>
-            <Nav />
-
+        <Page>
             <div className="flex flex-col items-center">
                 <div className="lg:w-8/12 p-8">
                     <OP />
                     <Replies />
                 </div>
             </div>
-
-
-        </div>
+        </Page>
     )
 }
