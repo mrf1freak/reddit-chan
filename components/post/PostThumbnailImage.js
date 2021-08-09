@@ -1,7 +1,8 @@
 import Image from 'next/image'
+import filesize from "filesize";
 
 export default function PostThumbnailImage(props){
-    const {tim, tn_w, tn_h, filename, ext} = props.post
+    const {tim, tn_w, tn_h, filename, ext, fsize} = props.post
     const {board, className} = props
 
     if(typeof tim === 'undefined') return null
@@ -16,7 +17,7 @@ export default function PostThumbnailImage(props){
                     alt={filename}
                 />
             </a>
-
+            <div className="text-xs text-gray-400 capitalize">{ext.toUpperCase().substring(1)} - {filesize(fsize, {round: 0})}</div>
         </div>
         )
 

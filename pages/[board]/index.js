@@ -18,10 +18,12 @@ export default function Catalog(){
 
         return (
             <a href={`/${board}/thread/${no}`}  className="block flex m-4 p-4 bg-white rounded shadow transition-shadow hover:shadow-lg">
-                <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
                 <div className="flex flex-col w-full justify-between items-stretch">
-                    <div className="text-gray-700 font-semibold" dangerouslySetInnerHTML={{__html: com}} />
-                    <div className="flex justify-between mt-2">
+                    <div className="flex">
+                        <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
+                        <div className="text-gray-700 font-semibold" dangerouslySetInnerHTML={{__html: com}} />
+                    </div>
+                    <div className="flex justify-between mt-4">
                         <PostStats post={props.thread} />
                         <span className="text-sm text-gray-400" title={now}>
                             {moment(now).fromNow()}
