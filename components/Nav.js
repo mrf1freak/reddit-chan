@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import * as cachios from 'cachios'
+import {getBoards} from "utils/api";
 
 
 export default function Nav(){
@@ -46,9 +46,8 @@ export default function Nav(){
 
 
     useEffect(() => {
-        cachios.get('/api/boards').then(result => {
-            const {data} = result
-            setBoards(data)
+        getBoards().then(boards => {
+            setBoards(boards)
         })
     }, [])
 
