@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
 import Page from "components/Page";
+import Head from "next/head";
 
 export default function Home() {
     const router = useRouter()
@@ -95,6 +96,9 @@ export default function Home() {
 
     return (
         <Page>
+            <Head>
+                <title>/{board}/ - {OPText()}</title>
+            </Head>
             <div className="">
                 <div className="lg:w-8/12 p-8">
                     <OP />

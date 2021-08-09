@@ -8,6 +8,7 @@ import moment from "moment";
 import Page from 'components/Page'
 import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
+import Head from "next/head";
 
 export default function Catalog(){
     const router = useRouter()
@@ -49,6 +50,9 @@ export default function Catalog(){
 
     return (
         <Page>
+            <Head>
+                <title>/{board}/ - Catalog</title>
+            </Head>
             <h1 className="p-8 text-center">/{board}/</h1>
             <div className="grid grid-cols-4 gap-4">
                 {

@@ -2,6 +2,7 @@ import Page from 'components/Page'
 import {getBoards} from "utils/api";
 import {useEffect, useState} from "react";
 import Link from 'next/link'
+import Head from 'next/head'
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
         const {board, title, meta_description} = props.board
 
         return (
-            <div className="p-4 bg-white border border-gray-200 border-solid rounded transition-all duration-700 hover:bg-gray-100 hover:shadow">
+            <div className="p-4 bg-white border border-gray-200 border-solid rounded transition-all duration-700 hover:shadow">
                 <Link href={`/${board}`}>
                     <a>
                         <div className="font-semibold">{board} - {title}</div>
@@ -40,6 +41,11 @@ export default function Home() {
 
     return (
         <Page>
+            <Head>
+                <title>
+                    RedditChan
+                </title>
+            </Head>
             <h1 className="p-8 text-center">Boards</h1>
             <Boards />
         </Page>
