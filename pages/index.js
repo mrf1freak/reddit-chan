@@ -1,6 +1,8 @@
 import Page from 'components/Page'
 import {getBoards} from "utils/api";
 import {useEffect, useState} from "react";
+import Link from 'next/link'
+
 
 export default function Home() {
     const [boards, setBoards] = useState([])
@@ -10,10 +12,12 @@ export default function Home() {
 
         return (
             <div className="p-4 bg-white border border-gray-200 border-solid rounded transition-all duration-700 hover:bg-gray-100 hover:shadow">
-                <a href={`/${board}`} onFocus={() => setFocus(true)}>
-                    <div className="font-semibold">{board} - {title}</div>
-                    <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
-                </a>
+                <Link href={`/${board}`}>
+                    <a>
+                        <div className="font-semibold">{board} - {title}</div>
+                        <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
+                    </a>
+                </Link>
             </div>
         )
     }

@@ -1,5 +1,7 @@
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import Link from 'next/link'
+
 import axios from "axios";
 import moment from "moment";
 
@@ -17,7 +19,8 @@ export default function Catalog(){
         const {no, com, now} = props.thread
 
         return (
-            <a href={`/${board}/thread/${no}`}  className="block flex m-4 p-4 bg-white rounded shadow transition-shadow group hover:shadow-lg">
+            <Link href={`/${board}/thread/${no}`}>
+            <a className="block flex m-4 p-4 bg-white rounded shadow transition-shadow group hover:shadow-lg">
                 <div className="flex flex-col w-full justify-between items-stretch">
                     <div className="flex">
                         <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
@@ -31,6 +34,7 @@ export default function Catalog(){
                     </div>
                 </div>
             </a>
+            </Link>
         )
     }
 

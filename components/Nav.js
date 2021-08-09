@@ -27,10 +27,13 @@ export default function Nav(){
 
         return (
             <div className="p-2 border-b border-gray-200 border-solid transition-colors duration-700 hover:bg-gray-100">
-                <a href={`/${board}`} onFocus={() => setFocus(true)}>
-                    <div className="font-semibold">{board} - {title}</div>
-                    <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
-                </a>
+                <Link href={`/${board}`}>
+                    <a>
+                        <div className="font-semibold">{board} - {title}</div>
+                        <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
+                    </a>
+                </Link>
+
             </div>
         )
     }
