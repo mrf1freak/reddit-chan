@@ -36,7 +36,7 @@ export default function Home() {
 
     return (
         <Page>
-            <h1 className="p-8 text-6xl font-semibold text-center">Boards</h1>
+            <h1 className="p-8 text-center">Boards</h1>
             <Boards />
         </Page>
     )

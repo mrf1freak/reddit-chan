@@ -17,28 +17,18 @@ export default function Catalog(){
         const {no, com, now} = props.thread
 
         return (
-            <div>
-                <a href={`/${board}/thread/${no}`}>
-                    <div className="m-4 p-4 bg-white rounded shadow">
-                        <div className="flex">
-                            <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
-                            <div className="flex flex-col w-full justify-between items-stretch">
-                                <div className="flex justify-between">
-                                    <div>
-                                        <div dangerouslySetInnerHTML={{__html: com}} />
-                                    </div>
-                                    <span className="text-sm text-gray-400" title={now}>
-                                        {moment(now).fromNow()}
-                                    </span>
-                                </div>
-                                <div>
-                                    <PostStats post={props.thread} />
-                                </div>
-                            </div>
-                        </div>
+            <a href={`/${board}/thread/${no}`}  className="block flex m-4 p-4 bg-white rounded shadow transition-shadow hover:shadow-lg">
+                <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
+                <div className="flex flex-col w-full justify-between items-stretch">
+                    <div className="text-gray-700 font-semibold" dangerouslySetInnerHTML={{__html: com}} />
+                    <div className="flex justify-between mt-2">
+                        <PostStats post={props.thread} />
+                        <span className="text-sm text-gray-400" title={now}>
+                            {moment(now).fromNow()}
+                        </span>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
         )
     }
 
@@ -53,9 +43,13 @@ export default function Catalog(){
 
     return (
         <Page>
-            {
-                threads.map(thread => <Thread key={thread['md5']} thread={thread} />)
-            }
+            <h1 className="p-8 text-center">/{board}/</h1>
+            <div className="grid grid-cols-4 gap-4">
+                {
+                    threads.map(thread => <Thread key={thread['md5']} thread={thread} />)
+                }
+            </div>
+
         </Page>
     )
 }

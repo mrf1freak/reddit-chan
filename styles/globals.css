@@ -6,6 +6,10 @@ body {
     @apply bg-blue-50
 }
 
+h1 {
+    @apply text-6xl font-semibold
+}
+
 span.quote {
     @apply text-green-600
 }
