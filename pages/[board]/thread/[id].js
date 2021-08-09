@@ -52,7 +52,7 @@ export default function Home() {
         return (
             <div className="mt-2">
                 <div className="p-4 bg-white border-l-4 border-solid rounded shadow cursor-pointer transition-colors duration-500 hover:bg-gray-50" style={{borderColor: color(index)}} onClick={() => setHidden(!hidden)}>
-                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span> ({index})</div>
+                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span></div>
                     <div className="flex flex-row">
                         <PostThumbnailImage post={post} board={board} className="mr-4" />
                         <div dangerouslySetInnerHTML={{__html: reply}}/>
@@ -66,12 +66,14 @@ export default function Home() {
     function OP(){
         if(typeof posts[OP_ID] === 'undefined') return null
 
-        return <div className="mb-16 p-3 flex flex-col justify-center items-center bg-white rounded">
+        return <div className="inline-block mb-16 p-3 bg-white border border-gray-300 rounded">
             <h2 className="text-xl">
-                <div dangerouslySetInnerHTML={{__html: OPText()}} className="p-4 mb-16" />
+                <div dangerouslySetInnerHTML={{__html: OPText()}} className="mb-4" />
             </h2>
-            <PostThumbnailImage post={posts[OP_ID]} board={board} className="mr-4" />
-            <PostStats post={posts[OP_ID]} />
+            <PostThumbnailImage post={posts[OP_ID]} board={board} />
+            <div className="mt-4">
+                <PostStats post={posts[OP_ID]} />
+            </div>
         </div>
     }
 
@@ -93,7 +95,7 @@ export default function Home() {
 
     return (
         <Page>
-            <div className="flex flex-col items-center">
+            <div className="">
                 <div className="lg:w-8/12 p-8">
                     <OP />
                     <Replies />

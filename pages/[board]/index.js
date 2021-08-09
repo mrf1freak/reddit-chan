@@ -17,11 +17,11 @@ export default function Catalog(){
         const {no, com, now} = props.thread
 
         return (
-            <a href={`/${board}/thread/${no}`}  className="block flex m-4 p-4 bg-white rounded shadow transition-shadow hover:shadow-lg">
+            <a href={`/${board}/thread/${no}`}  className="block flex m-4 p-4 bg-white rounded shadow transition-shadow group hover:shadow-lg">
                 <div className="flex flex-col w-full justify-between items-stretch">
                     <div className="flex">
                         <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
-                        <div className="text-gray-700 font-semibold" dangerouslySetInnerHTML={{__html: com}} />
+                        <div className="text-gray-700 font-semibold group-hover:underline" dangerouslySetInnerHTML={{__html: com}} />
                     </div>
                     <div className="flex justify-between mt-4">
                         <PostStats post={props.thread} />
