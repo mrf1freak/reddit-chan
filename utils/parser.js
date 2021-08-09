@@ -87,6 +87,7 @@ export function postReplies(id, string, opID){
         }
     }
     if(reply !== '' && replyIDs.length === 0) replyIDs.push(opID)
+    if(reply === '') reply = ' '
     addReplies(replies, replyIDs, reply, id)
 
     // Remove the starting break tag from posts
