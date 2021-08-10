@@ -17,7 +17,8 @@ export default function PostThumbnailImage(props){
                     alt={filename}
                 />
             </a>
-            <div className="text-xs text-gray-400 capitalize">{ext.toUpperCase().substring(1)} - {filesize(fsize, {round: 0})}</div>
+            <div className="text-xs text-gray-400 overflow-ellipsis">{filename}{ext}</div>
+            <div className="text-xs text-gray-400">{ext.toUpperCase().substring(1)} - {filesize(fsize, {round: 0})}</div>
         </div>
         )
 

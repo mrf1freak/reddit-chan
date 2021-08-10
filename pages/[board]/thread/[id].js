@@ -67,7 +67,7 @@ export default function Home() {
     function OP(){
         if(typeof posts[OP_ID] === 'undefined') return null
 
-        return <div className="inline-block mb-16 p-3 bg-white border border-gray-300 rounded">
+        return <div className="inline-block mb-16 p-3 bg-white border border-gray-300 rounded shadow">
             <h2 className="text-xl">
                 <div dangerouslySetInnerHTML={{__html: OPText()}} className="mb-4" />
             </h2>
