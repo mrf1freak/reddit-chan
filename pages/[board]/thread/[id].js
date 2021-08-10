@@ -6,6 +6,7 @@ import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
 import Page from "components/Page";
 import Head from "next/head";
+import moment from "moment";
 
 export default function Home() {
     const router = useRouter()
@@ -45,15 +46,16 @@ export default function Home() {
         }
 
         function color(i){
-            const colors = ['#00000000', '#ef476f', '#FFD166', '#06D6A0', '#118AB2', '#073B4C']
+            const colors = ['#ef476f', '#FFD166', '#06D6A0', '#118AB2', '#073B4C']
 
-            return colors[i % colors.length]
+            if(i === 0) return '#00000000'
+            return colors[(i - 1) % colors.length]
         }
 
         return (
-            <div className="mt-2">
-                <div className="p-4 bg-white border-l-4 border-solid rounded shadow cursor-pointer transition-colors duration-500 hover:bg-gray-50" style={{borderColor: color(index)}} onClick={() => setHidden(!hidden)}>
-                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span></div>
+            <div className="border-t">
+                <div className="p-4 border-l-4 border-solid cursor-pointer transition-colors duration-500 hover:bg-gray-50" style={{borderColor: color(index)}} onClick={() => setHidden(!hidden)}>
+                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span><span className="text-xs" title={post['now']}> - {moment(post['now']).fromNow()}</span></div>
                     <div className="flex flex-row">
                         <PostThumbnailImage post={post} board={board} className="mr-4" />
                         <div dangerouslySetInnerHTML={{__html: reply}}/>
@@ -78,10 +80,14 @@ export default function Home() {
         </div>
     }
 
-    function Replies(){
-        if(typeof replies[OP_ID] === 'undefined') return null
+    function Replies() {
+        if (typeof replies[OP_ID] === 'undefined') return null
 
-        return replies[OP_ID]?.map(post => <Reply key={post.reply} index={0} {...post}/>)
+        return (
+            <div className="bg-white shadow rounded">
+                {replies[OP_ID]?.map(post => <Reply key={post.reply} index={0} {...post}/>)}
+            </div>
+        )
 
     }
 
