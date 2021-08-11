@@ -53,7 +53,7 @@ export default function Catalog(){
             <Head>
                 <title>/{board}/ - Catalog</title>
             </Head>
-            <h1 className="p-8 text-center">/{board}/</h1>
+            <h1 className="p-8">/{board}/</h1>
             <div className="grid grid-cols-4 gap-4">
                 {
                     threads.map(thread => <Thread key={thread['md5']} thread={thread} />)

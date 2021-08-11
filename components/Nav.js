@@ -18,8 +18,21 @@ export default function Nav(){
         return JSON.parse(threadString)
     }
 
-    function handleRemoveRecent(no, board){
-        setRecentThreads(recentThreads.filter(item => item.no !== no && item.board !== board))
+    function removeRecentThread(no, board){
+        if(typeof localStorage === 'undefined') return
+
+        const threads = getRecentThreads()
+        const threadString = JSON.stringify(threads.filter(item => item.no !== no))
+
+        localStorage.setItem('threads', threadString)
+
+    }
+
+    function handleRemoveRecent(e, no, board){
+        e.preventDefault()
+
+        setRecentThreads(recentThreads.filter(item => item.no !== no))
+        removeRecentThread(no, board)
     }
 
 
@@ -31,15 +44,15 @@ export default function Nav(){
 
         return (
             <Link href={`/${board}/thread/${no}`}>
-                <a className={"flex items-center m-4 p-2 text-sm opacity-80 font-semibold rounded group hover:opacity-100" + (isActive ? activeStyle : '')}>
+                <a className={"flex items-center m-4 p-2 text-sm opacity-80 font-semibold rounded animate transition-opacity group hover:opacity-100" + (isActive ? activeStyle : '')}>
                     <div className="flex-shrink-0 mr-4 rounded">
                         <Image src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
                     </div>
-                    <div className="whitespace-nowrap overflow-hidden">
+                    <div className="whitespace-nowrap overflow-hidden mr-auto">
                         <div className="" dangerouslySetInnerHTML={{__html: com}} />
                         <span className="text-xs text-gray-600">/{board}/</span>
                     </div>
-                    <div className="flex-shrink-0 hidden ml-auto opacity-60 hover:opacity-100 hover:text-red-500 group-hover:block" onClick={() => handleRemoveRecent()}><CgClose/></div>
+                    <div className="flex items-center flex-shrink-0 px-2 ml-2 self-stretch hidden opacity-60 hover:opacity-100 hover:text-red-500 group-hover:flex" onClick={(e) => handleRemoveRecent(e, no, board)}><CgClose/></div>
                 </a>
             </Link>
         )
@@ -48,27 +61,31 @@ export default function Nav(){
     function RecentThreads(){
         return(
             <div>
-                {getRecentThreads().map(item => <Thread thread={item} key={item.board + item.no}/>)}
+                {recentThreads.map(item => <Thread thread={item} key={item.board + item.no}/>)}
             </div>
         )
     }
 
     useEffect(() => {
         setRecentThreads(getRecentThreads())
-    }, [router.asPath])
+    }, [])
 
     return (
         <nav className="h-full bg-white shadow-lg">
-            <Link href="/" className="p-8">
-                <a className="flex text-xl font-semibold md:flex-1 pr-3">RedditChan</a>
+            <Link href="/">
+                <a className="flex items-center justify-center text-3xl p-4 py-12 font-light md:flex-1">
+                    <div className="flex items-center mr-2">
+                        <Image src="/logo.png" width="32" height="32" alt="RedditChan"/>
+                    </div>
+                    RedditChan</a>
             </Link>
 
             <ul className="mt-18">
-                <li className={"pl-8 py-2 border-red-500 text-lg font-semibold text-gray-400" + (router.pathname === '/' ? ' border-l-4 text-black' : '')}>Boards</li>
+                {/*<li className={"pl-8 py-2 border-red-500 text-lg font-semibold text-gray-400" + (router.pathname === '/' ? ' border-l-4 text-black' : '')}>Boards</li>*/}
             </ul>
 
             <div>
-                <h3 className="ml-4 text-sm text-gray-400 font-bold">Recent Threads</h3>
+                <h3 className="ml-4 text-sm text-gray-400 font-light">Recent Threads</h3>
                 <RecentThreads/>
             </div>
         </nav>

@@ -46,7 +46,7 @@ export default function Home() {
                     RedditChan
                 </title>
             </Head>
-            <h1 className="p-8 text-center">Boards</h1>
+            <h1 className="p-8">Boards</h1>
             <Boards />
         </Page>
     )

@@ -8,6 +8,7 @@ import Page from "components/Page";
 import Head from "next/head";
 import Link from "next/link";
 import moment from "moment";
+import {BsArrowLeft} from "react-icons/bs";
 
 export default function Home() {
     const router = useRouter()
@@ -38,7 +39,7 @@ export default function Home() {
                 <div>
                     {
                         hidden ?
-                            <div className="ml-4 mt-4 italic">Replies have been hidden</div>
+                            null
                             :
                             <div className="ml-6"> {replies[id]?.map(post => <Reply key={post.reply} index={index + 1} {...post}/>)}</div>
                     }
@@ -53,6 +54,8 @@ export default function Home() {
             return colors[(i - 1) % colors.length]
         }
 
+        if(typeof post === 'undefined') return null
+
         return (
             <div className="border-t">
                 <div className="p-4 border-l-4 border-solid cursor-pointer transition-colors duration-500 hover:bg-gray-50" style={{borderColor: color(index)}} onClick={() => setHidden(!hidden)}>
@@ -61,6 +64,7 @@ export default function Home() {
                         <PostThumbnailImage post={post} board={board} className="mr-4" />
                         <span className="whitespace-normal" dangerouslySetInnerHTML={{__html: reply}}/>
                     </div>
+                    {hidden && <div className="ml-4 mt-4 italic">Replies have been hidden</div> }
                 </div>
                 <Replies />
             </div>
@@ -124,7 +128,7 @@ export default function Home() {
             <div className="p-8">
                 <h2 className="font-light text-4xl mb-8">
                     <Link href={`/${board}`}>
-                        <a>back to /{board}/</a>
+                        <a className="flex items-end"><BsArrowLeft/>/back to /{board}/</a>
                     </Link>
                 </h2>
                 <OP />
