@@ -1,71 +1,75 @@
 import {useEffect, useState} from "react";
 import Link from 'next/link'
-import {getBoards} from "utils/api";
+import Image from 'next/image'
+import {useRouter} from "next/router";
+import {postThumbnailLink} from "utils/post";
+import {CgClose} from "react-icons/cg";
 
 
 export default function Nav(){
-    const [boards, setBoards] = useState([])
-    const [search, setSearch] = useState('')
-    const [focus, setFocus] = useState(false)
+    const [recentThreads, setRecentThreads] = useState([])
 
-    function searchBoards(){
-        if(search === '') return boards.slice(0, 4)
+    const router = useRouter()
 
-        return boards.filter(item => {
-            const {board, title, meta_description} = item
+    function getRecentThreads(){
+        if(typeof localStorage === 'undefined') return []
 
-            const string = board + " " + title + " " + meta_description
-            console.log(string)
-            return string.toLowerCase().includes(search.toLowerCase())
-        }).slice(0, 4)
-
-        // TODO: sort the results
+        const threadString = localStorage.getItem('threads') || '[]'
+        return JSON.parse(threadString)
     }
 
-    function Board(props){
-        const {board, title, meta_description} = props.board
+    function handleRemoveRecent(no, board){
+        setRecentThreads(recentThreads.filter(item => item.no !== no && item.board !== board))
+    }
+
+
+    function Thread(props){
+        const {com, tim, no, board} = props.thread
+
+        const isActive = router.asPath.includes(board) && router.asPath.includes(no)
+        const activeStyle = ' opacity-100 bg-gray-100'
 
         return (
-            <div className="p-2 border-b border-gray-200 border-solid transition-colors duration-700 hover:bg-gray-100">
-                <Link href={`/${board}`}>
-                    <a>
-                        <div className="font-semibold">{board} - {title}</div>
-                        <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
-                    </a>
-                </Link>
-
-            </div>
+            <Link href={`/${board}/thread/${no}`}>
+                <a className={"flex items-center m-4 p-2 text-sm opacity-80 font-semibold rounded group hover:opacity-100" + (isActive ? activeStyle : '')}>
+                    <div className="flex-shrink-0 mr-4 rounded">
+                        <Image src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
+                    </div>
+                    <div className="whitespace-nowrap overflow-hidden">
+                        <div className="" dangerouslySetInnerHTML={{__html: com}} />
+                        <span className="text-xs text-gray-600">/{board}/</span>
+                    </div>
+                    <div className="flex-shrink-0 hidden ml-auto opacity-60 hover:opacity-100 hover:text-red-500 group-hover:block" onClick={() => handleRemoveRecent()}><CgClose/></div>
+                </a>
+            </Link>
         )
     }
 
-    function Boards(){
-        if (!focus) return null
-
-        return (
-            <div className="absolute w-full bg-white top-14 border-gray-200 border border-solid rounded shadow">
-                { searchBoards().map(item => <Board board={item} key={item['board']}/>)}
+    function RecentThreads(){
+        return(
+            <div>
+                {getRecentThreads().map(item => <Thread thread={item} key={item.board + item.no}/>)}
             </div>
         )
     }
-
 
     useEffect(() => {
-        getBoards().then(boards => {
-            setBoards(boards)
-        })
-    }, [])
+        setRecentThreads(getRecentThreads())
+    }, [router.asPath])
 
     return (
-        <nav className="flex items-center bg-white shadow p-4">
-            <Link href="/">
+        <nav className="h-full bg-white shadow-lg">
+            <Link href="/" className="p-8">
                 <a className="flex text-xl font-semibold md:flex-1 pr-3">RedditChan</a>
             </Link>
-            <div className="relative flex flex-1 justify-center items-stretch">
-                <input type="text" name="" id="" className="flex flex-1 p-2 bg-gray-100 focus:bg-white" placeholder="Search Boards" title={search} onChange={e => setSearch(e.target.value)} onFocus={() => setFocus(true)} onBlur={() => setTimeout(() => setFocus(false), 250)}/>
-                <Boards />
-            </div>
-            <div className="flex flex-1 hidden md:block">
 
+            <ul className="mt-18">
+                <li className={"pl-8 py-2 border-red-500 text-lg font-semibold text-gray-400" + (router.pathname === '/' ? ' border-l-4 text-black' : '')}>Boards</li>
+            </ul>
+
+            <div>
+                <h3 className="ml-4 text-sm text-gray-400 font-bold">Recent Threads</h3>
+                <RecentThreads/>
             </div>
         </nav>
     )

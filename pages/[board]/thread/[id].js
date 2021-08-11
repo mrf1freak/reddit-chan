@@ -6,6 +6,7 @@ import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
 import Page from "components/Page";
 import Head from "next/head";
+import Link from "next/link";
 import moment from "moment";
 
 export default function Home() {
@@ -34,12 +35,12 @@ export default function Home() {
             if(typeof replies[id] === 'undefined') return null
 
             return (
-                <div className="flex flex-col" id="replies">
+                <div>
                     {
                         hidden ?
                             <div className="ml-4 mt-4 italic">Replies have been hidden</div>
                             :
-                            <div className="flex flex-col ml-6"> {replies[id]?.map(post => <Reply key={post.reply} index={index + 1} {...post}/>)}</div>
+                            <div className="ml-6"> {replies[id]?.map(post => <Reply key={post.reply} index={index + 1} {...post}/>)}</div>
                     }
                 </div>
             )
@@ -58,7 +59,7 @@ export default function Home() {
                     <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span><span className="text-xs" title={post['now']}> - {moment(post['now']).fromNow()}</span></div>
                     <div className="flex flex-row">
                         <PostThumbnailImage post={post} board={board} className="mr-4" />
-                        <div dangerouslySetInnerHTML={{__html: reply}}/>
+                        <span className="whitespace-normal" dangerouslySetInnerHTML={{__html: reply}}/>
                     </div>
                 </div>
                 <Replies />
@@ -97,19 +98,37 @@ export default function Home() {
             const {replies, posts} = response.data
             setPosts(posts)
             setReplies(replies)
+            addThreadToRecent(posts[OP_ID], BOARD)
         })
     }, [BOARD, OP_ID])
+
+    function addThreadToRecent(thread, board){
+        const threadString = window.localStorage.getItem("threads") || '[]'
+        let threads = JSON.parse(threadString)
+
+        const alreadyAdded = threads.some(item => item.no === thread.no && item.board === board)
+        if(alreadyAdded) return
+
+        const {com, no, tim} = thread
+        threads.unshift({com, no, board, tim})
+
+        window.localStorage.setItem('threads', JSON.stringify(threads))
+    }
 
     return (
         <Page>
             <Head>
                 <title>/{board}/ - {OPText()}</title>
             </Head>
-            <div className="">
-                <div className="lg:w-8/12 p-8">
-                    <OP />
-                    <Replies />
-                </div>
+
+            <div className="p-8">
+                <h2 className="font-light text-4xl mb-8">
+                    <Link href={`/${board}`}>
+                        <a>back to /{board}/</a>
+                    </Link>
+                </h2>
+                <OP />
+                <Replies />
             </div>
         </Page>
     )
