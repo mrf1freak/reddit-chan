@@ -52,7 +52,7 @@ export default function Nav(){
                         <div className="max-h-6 overflow-hidden" dangerouslySetInnerHTML={{__html: com}} />
                         <span className="text-xs text-gray-600">/{board}/</span>
                     </div>
-                    <div className="flex items-center flex-shrink-0 px-2 ml-2 self-stretch hidden opacity-60 hover:opacity-100 hover:text-red-500 group-hover:flex" onClick={(e) => handleRemoveRecent(e, no, board)}><CgClose/></div>
+                    <div className="flex items-center flex-shrink-0 px-2 ml-2 self-stretch md:hidden opacity-60 hover:opacity-100 hover:text-red-500 group-hover:flex" onClick={(e) => handleRemoveRecent(e, no, board)}><CgClose/></div>
                 </a>
             </Link>
         )
@@ -68,7 +68,6 @@ export default function Nav(){
 
     useEffect(() => {
         setRecentThreads(getRecentThreads())
-        console.log('nav')
     }, [])
 
     return (

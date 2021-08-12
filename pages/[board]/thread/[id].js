@@ -18,7 +18,7 @@ export default function Home() {
 
     const [replies, setReplies] = useState({})
     const [posts, setPosts] = useState({})
-    const [status, setStatus] = useState(200)
+    const [status, setStatus] = useState(0)
     const OP_ID = parseInt(id)
     const BOARD = board
 
@@ -100,6 +100,7 @@ export default function Home() {
     }
 
     function Thread(){
+        if(status === 0) return null
         if(status === 500) return <div><InternalError/></div>
         if(status === 404) return <div><NotFound/></div>
 

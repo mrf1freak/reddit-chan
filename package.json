@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "cachios": "^3.0.0",
     "filesize": "^7.0.0",
+    "framer-motion": "^4.1.17",
     "moment": "^2.29.1",
     "next": "11.0.1",
     "react": "17.0.2",
