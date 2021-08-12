@@ -40,11 +40,11 @@ export default function Nav(){
         const {com, tim, no, board} = props.thread
 
         const isActive = router.asPath.includes(board) && router.asPath.includes(no)
-        const activeStyle = ' opacity-100 bg-gray-100'
+        const activeStyle = ' opacity-100 bg-gray-100 border-l-4 border-red-500 border-solid'
 
         return (
             <Link href={`/${board}/thread/${no}`}>
-                <a className={"flex items-center m-4 p-2 text-sm opacity-80 font-semibold rounded animate transition-opacity group hover:opacity-100" + (isActive ? activeStyle : '')}>
+                <a className={"flex items-center m-4 p-2 text-sm font-semibold rounded animate transition-opacity group hover:bg-gray-100" + (isActive ? activeStyle : '')}>
                     <div className="flex-shrink-0 mr-4 rounded">
                         <Image src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
                     </div>
@@ -61,7 +61,7 @@ export default function Nav(){
     function RecentThreads(){
         return(
             <div>
-                {recentThreads.map(item => <Thread thread={item} key={item.board + item.no}/>)}
+                {recentThreads.map(item => <Thread thread={item} key={item.tim}/>)}
             </div>
         )
     }
