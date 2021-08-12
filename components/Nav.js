@@ -49,7 +49,7 @@ export default function Nav(){
                         <Image src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
                     </div>
                     <div className="whitespace-nowrap overflow-hidden mr-auto">
-                        <div className="max-h-12 overflow-hidden" dangerouslySetInnerHTML={{__html: com}} />
+                        <div className="max-h-6 overflow-hidden" dangerouslySetInnerHTML={{__html: com}} />
                         <span className="text-xs text-gray-600">/{board}/</span>
                     </div>
                     <div className="flex items-center flex-shrink-0 px-2 ml-2 self-stretch hidden opacity-60 hover:opacity-100 hover:text-red-500 group-hover:flex" onClick={(e) => handleRemoveRecent(e, no, board)}><CgClose/></div>
