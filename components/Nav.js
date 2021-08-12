@@ -68,6 +68,7 @@ export default function Nav(){
 
     useEffect(() => {
         setRecentThreads(getRecentThreads())
+        console.log('nav')
     }, [])
 
     return (

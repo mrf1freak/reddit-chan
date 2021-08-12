@@ -9,6 +9,8 @@ import Head from "next/head";
 import Link from "next/link";
 import moment from "moment";
 import {BsArrowLeft} from "react-icons/bs";
+import InternalError from "components/InternalError";
+import NotFound from "components/NotFound";
 
 export default function Home() {
     const router = useRouter()
@@ -16,6 +18,7 @@ export default function Home() {
 
     const [replies, setReplies] = useState({})
     const [posts, setPosts] = useState({})
+    const [status, setStatus] = useState(200)
     const OP_ID = parseInt(id)
     const BOARD = board
 
@@ -96,13 +99,27 @@ export default function Home() {
 
     }
 
+    function Thread(){
+        if(status === 500) return <div><InternalError/></div>
+        if(status === 404) return <div><NotFound/></div>
+
+        return <div>
+            <OP />
+            <Replies />
+        </div>
+    }
+
     useEffect(() => {
         if(typeof BOARD === 'undefined' || typeof OP_ID === 'undefined') return
         axios.get(`/api/${BOARD}/thread/${OP_ID}`).then(response => {
             const {replies, posts} = response.data
             setPosts(posts)
             setReplies(replies)
+            setStatus(200)
             addThreadToRecent(posts[OP_ID], BOARD)
+        }).catch(e => {
+            console.log(e)
+            setStatus(e.response?.status)
         })
     }, [BOARD, OP_ID])
 
@@ -131,8 +148,7 @@ export default function Home() {
                         <a className="flex items-end"><BsArrowLeft/>/back to /{board}/</a>
                     </Link>
                 </h2>
-                <OP />
-                <Replies />
+                <Thread/>
             </div>
         </Page>
     )

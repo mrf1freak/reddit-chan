@@ -6,9 +6,9 @@ import axios from "axios";
 import moment from "moment";
 
 import Page from 'components/Page'
-import PostThumbnailImage from "components/post/PostThumbnailImage";
 import PostStats from "components/post/PostStats";
 import Head from "next/head";
+import {postThumbnailLink} from "utils/post";
 
 export default function Catalog(){
     const router = useRouter()
@@ -17,23 +17,25 @@ export default function Catalog(){
     const [threads, setThreads] = useState([])
 
     function Thread(props){
-        const {no, com, now} = props.thread
+        const {no, com, now, tim} = props.thread
 
         return (
             <Link href={`/${board}/thread/${no}`}>
-            <a className="block flex m-4 p-4 bg-white rounded shadow transition-shadow group hover:shadow-lg">
-                <div className="flex flex-col w-full justify-between items-stretch">
-                    <div className="flex">
-                        <PostThumbnailImage post={props.thread} board={board} className="mr-4" />
-                        <div className="text-gray-700 font-semibold group-hover:underline" dangerouslySetInnerHTML={{__html: com}} />
-                    </div>
-                    <div className="flex justify-between mt-4">
-                        <PostStats post={props.thread} />
+            <a className="block flex px-4 py-2 bg-white border-t border-gray-200 shadow transition-shadow group hover:shadow-lg">
+                <div className="h-full w-20 mr-6">
+                    <img src={postThumbnailLink(board, tim)} alt=""/>
+                </div>
+
+                <div className="flex flex-col justify-between w-full">
+                    <div className="text-gray-700 font-semibold group-hover:underline" dangerouslySetInnerHTML={{__html: com}} />
+                    <div className="flex flex-row justify-between items-end">
+                        <div className="mt-4"><PostStats post={props.thread} /></div>
                         <span className="text-sm text-gray-400" title={now}>
                             {moment(now).fromNow()}
                         </span>
                     </div>
                 </div>
+
             </a>
             </Link>
         )
@@ -54,7 +56,7 @@ export default function Catalog(){
                 <title>/{board}/ - Catalog</title>
             </Head>
             <h1 className="p-8">/{board}/</h1>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="m-8 bg-white rounded shadow">
                 {
                     threads.map(thread => <Thread key={thread['md5']} thread={thread} />)
                 }

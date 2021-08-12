@@ -17,7 +17,9 @@ export default function PostThumbnailImage(props){
                     src={postThumbnailLink(board, tim)}
                     width={tn_w}
                     height={tn_h}
+                    // layout="fill"
                     alt={filename}
+
                 />
             </a>
             <div className="text-xs text-gray-400 max-w-xs">{filename}{ext}</div>
