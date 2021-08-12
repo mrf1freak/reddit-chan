@@ -4,11 +4,13 @@ import Link from 'next/link'
 
 import axios from "axios";
 import moment from "moment";
+import {motion, AnimatePresence} from "framer-motion";
 
 import Page from 'components/Page'
 import PostStats from "components/post/PostStats";
 import Head from "next/head";
 import {postThumbnailLink} from "utils/post";
+
 
 export default function Catalog(){
     const router = useRouter()
@@ -20,6 +22,10 @@ export default function Catalog(){
         const {no, com, now, tim} = props.thread
 
         return (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}>
             <Link href={`/${board}/thread/${no}`}>
             <a className="block flex px-4 py-2 bg-white border-t border-gray-200 shadow transition-shadow group hover:shadow-lg">
                 <div className="h-full w-20 mr-6">
@@ -38,6 +44,8 @@ export default function Catalog(){
 
             </a>
             </Link>
+            </motion.div>
+
         )
     }
 
@@ -56,11 +64,13 @@ export default function Catalog(){
                 <title>/{board}/ - Catalog</title>
             </Head>
             <h1 className="p-8">/{board}/</h1>
+            <AnimatePresence>
             <div className="m-8 bg-white rounded shadow">
                 {
                     threads.map(thread => <Thread key={thread['md5']} thread={thread} />)
                 }
             </div>
+            </AnimatePresence>
 
         </Page>
     )
