@@ -3,13 +3,12 @@ import {useEffect, useState} from "react";
 import Link from 'next/link'
 
 import axios from "axios";
-import moment from "moment";
 import {motion, AnimatePresence} from "framer-motion";
 
 import Page from 'components/Page'
 import PostStats from "components/post/PostStats";
 import Head from "next/head";
-import {postThumbnailLink} from "utils/post";
+import {postThumbnailLink, postTimeFromNow} from "utils/post";
 
 
 export default function Catalog(){
@@ -37,7 +36,7 @@ export default function Catalog(){
                     <div className="flex flex-row justify-between items-end">
                         <div className="mt-4"><PostStats post={props.thread} /></div>
                         <span className="text-sm text-gray-400" title={now}>
-                            {moment(now).fromNow()}
+                            {postTimeFromNow(now)}
                         </span>
                     </div>
                 </div>
