@@ -5,5 +5,5 @@ export function postThumbnailLink(board, tim) {
 }
 
 export function postTimeFromNow(now){
-    return moment.utc(now).add(-new Date().getTimezoneOffset(), 'minutes').fromNow()
+    return moment.utc(now).local().toString()
 }
