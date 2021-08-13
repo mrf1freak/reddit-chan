@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-50
+    @apply bg-gray-50;
 }
 
 h1 {
-    @apply text-6xl font-light
+    @apply text-6xl font-light;
 }
 
 span.quote {
-    @apply text-green-600
+    @apply text-green-600;
 }
