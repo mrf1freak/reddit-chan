@@ -18,7 +18,7 @@ export default function Catalog(){
     const [threads, setThreads] = useState([])
 
     function Thread(props){
-        const {no, com, now, tim} = props.thread
+        const {no, com, time, now, tim} = props.thread
 
         return (
             <motion.div
@@ -36,7 +36,7 @@ export default function Catalog(){
                     <div className="flex flex-row justify-between items-end">
                         <div className="mt-4"><PostStats post={props.thread} /></div>
                         <span className="text-sm text-gray-400" title={now}>
-                            {postTimeFromNow(now)}
+                            {postTimeFromNow(time)}
                         </span>
                     </div>
                 </div>

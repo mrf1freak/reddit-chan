@@ -62,7 +62,7 @@ export default function Home() {
         return (
             <div className="border-t">
                 <div className="p-4 border-l-4 border-solid cursor-pointer transition-colors duration-500 hover:bg-gray-50" style={{borderColor: color(index)}} onClick={() => setHidden(!hidden)}>
-                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span><span className="text-xs" title={post['now']}> - {postTimeFromNow(post['now'])}</span></div>
+                    <div className="inline-block py-1 mb-2 text-sm text-gray-600">{post['name']} - <span className="text-green-600">No. {id}</span><span className="text-xs" title={post['now']}> - {postTimeFromNow(post['time'])}</span></div>
                     <div className="flex flex-row">
                         <PostThumbnailImage post={post} board={board} className="mr-4" />
                         <span className="whitespace-normal" dangerouslySetInnerHTML={{__html: reply}}/>

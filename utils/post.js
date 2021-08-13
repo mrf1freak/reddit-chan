@@ -4,6 +4,6 @@ export function postThumbnailLink(board, tim) {
     return `https://i.4cdn.org/${board}/${tim}s.jpg`;
 }
 
-export function postTimeFromNow(now){
-    return moment.utc(now).local().toString()
+export function postTimeFromNow(time){
+    return moment.utc(time * 1000).fromNow()
 }
