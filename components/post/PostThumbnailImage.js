@@ -19,6 +19,7 @@ export default function PostThumbnailImage(props){
                     height={tn_h}
                     // layout="fill"
                     alt={filename}
+                    referrerPolicy="no-referrer"
 
                 />
             </a>

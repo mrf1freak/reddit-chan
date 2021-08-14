@@ -46,7 +46,7 @@ export default function Nav(){
             <Link href={`/${board}/thread/${no}`}>
                 <a className={"flex items-center m-4 p-2 text-sm font-semibold rounded animate transition-opacity group hover:bg-gray-100" + (isActive ? activeStyle : '')}>
                     <div className="flex-shrink-0 mr-4 rounded">
-                        <img src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
+                        <img src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail" referrerPolicy="no-referrer"/>
                     </div>
                     <div className="whitespace-nowrap overflow-hidden mr-auto">
                         <div className="max-h-6 overflow-hidden" dangerouslySetInnerHTML={{__html: com}} />

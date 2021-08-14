@@ -28,7 +28,7 @@ export default function Catalog(){
             <Link href={`/${board}/thread/${no}`}>
             <a className="block flex px-4 py-2 bg-white border-t border-gray-200 shadow transition-shadow group hover:shadow-lg">
                 <div className="h-full w-20 mr-6">
-                    <img src={postThumbnailLink(board, tim)} alt=""/>
+                    <img src={postThumbnailLink(board, tim)} alt="" referrerPolicy="no-referrer"/>
                 </div>
 
                 <div className="flex flex-col justify-between w-full">
