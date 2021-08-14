@@ -13,7 +13,7 @@ export default function PostThumbnailImage(props){
     return (
         <div className={className}>
             <a href={`https://i.4cdn.org/${board}/${tim}${ext}`} target="_blank" rel="noreferrer" className="pointer-events-auto">
-                <Image
+                <img
                     src={postThumbnailLink(board, tim)}
                     width={tn_w}
                     height={tn_h}

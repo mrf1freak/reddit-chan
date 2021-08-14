@@ -46,7 +46,7 @@ export default function Nav(){
             <Link href={`/${board}/thread/${no}`}>
                 <a className={"flex items-center m-4 p-2 text-sm font-semibold rounded animate transition-opacity group hover:bg-gray-100" + (isActive ? activeStyle : '')}>
                     <div className="flex-shrink-0 mr-4 rounded">
-                        <Image src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
+                        <img src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail"/>
                     </div>
                     <div className="whitespace-nowrap overflow-hidden mr-auto">
                         <div className="max-h-6 overflow-hidden" dangerouslySetInnerHTML={{__html: com}} />
@@ -75,7 +75,7 @@ export default function Nav(){
             <Link href="/">
                 <a className="flex items-center justify-center text-3xl p-4 py-12 font-light md:flex-1">
                     <div className="flex items-center mr-2">
-                        <Image src="/logo.png" width="32" height="32" alt="RedditChan"/>
+                        <img src="/logo.png" width="32" height="32" alt="RedditChan"/>
                     </div>
                     RedditChan</a>
             </Link>
