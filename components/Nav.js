@@ -43,7 +43,7 @@ export default function Nav(){
         const activeStyle = ' opacity-100 bg-gray-100 border-l-4 border-red-500 border-solid'
 
         return (
-            <Link href={`/${board}/thread/${no}`}>
+            <Link href={`/${board}/thread/${no}`} legacyBehavior>
                 <a className={"flex items-center m-4 p-2 text-sm font-semibold rounded animate transition-opacity group hover:bg-gray-100" + (isActive ? activeStyle : '')}>
                     <div className="flex-shrink-0 mr-4 rounded">
                         <img src={postThumbnailLink(board, tim)} width="38" height="38" className="flex-shrink-0" alt="thread thumbnail" referrerPolicy="no-referrer"/>
@@ -72,7 +72,7 @@ export default function Nav(){
 
     return (
         <nav className="h-full bg-white shadow-lg">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
                 <a className="flex items-center justify-center text-3xl p-4 py-12 font-light md:flex-1">
                     <div className="flex items-center mr-2">
                         <img src="/logo.png" width="32" height="32" alt="RedditChan"/>

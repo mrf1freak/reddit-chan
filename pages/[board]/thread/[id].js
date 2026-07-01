@@ -145,7 +145,7 @@ export default function Home() {
 
             <div className="p-8">
                 <h2 className="font-light text-4xl mb-8">
-                    <Link href={`/${board}`}>
+                    <Link href={`/${board}`} legacyBehavior>
                         <a className="flex items-end"><BsArrowLeft/>/back to /{board}/</a>
                     </Link>
                 </h2>

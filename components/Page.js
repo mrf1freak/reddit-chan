@@ -31,7 +31,7 @@ export default function Page(props){
 
             <AnimatePresence>
             <motion.div
-                initial={{opacity: 0}}
+                // initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 exit={{opacity: 0}}
             >

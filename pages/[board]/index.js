@@ -22,10 +22,10 @@ export default function Catalog(){
 
         return (
             <motion.div
-                initial={{ opacity: 0 }}
+                // initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}>
-            <Link href={`/${board}/thread/${no}`}>
+            <Link href={`/${board}/thread/${no}`} legacyBehavior>
             <a className="block flex px-4 py-2 bg-white border-t border-gray-200 shadow transition-shadow group hover:shadow-lg">
                 <div className="h-full w-20 mr-6">
                     <img src={postThumbnailLink(board, tim)} alt="" referrerPolicy="no-referrer"/>

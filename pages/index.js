@@ -13,7 +13,7 @@ export default function Home() {
 
         return (
             <div className="p-4 bg-white border border-gray-200 border-solid rounded transition-all duration-700 hover:shadow">
-                <Link href={`/${board}`}>
+                <Link href={`/${board}`} legacyBehavior>
                     <a>
                         <div className="font-semibold">{board} - {title}</div>
                         <div dangerouslySetInnerHTML={{__html: meta_description}} className="font-light text-sm text-gray-600 mt-2" />
