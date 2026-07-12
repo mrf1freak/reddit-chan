@@ -63,7 +63,7 @@ export default async function Catalog({
               <FallbackImage
                 src={postThumbnailLink(board, tim)}
                 alt=""
-                className="mr-4 w-20 shrink-0 self-stretch min-h-10 object-cover"
+                className="mr-4 w-20 shrink-0 max-h-20 min-h-10 object-cover"
                 referrerPolicy="no-referrer"
                 loading="lazy"
               />
