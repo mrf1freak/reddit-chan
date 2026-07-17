@@ -50,7 +50,7 @@ export default async function Catalog({
 
   return (
     <div className="p-8">
-      <h1 className="mb-6 text-4xl">/{board}/</h1>
+      <h1 className="mb-6 text-4xl font-light">/{board}/</h1>
       <Card className="py-0 gap-0">
         {threads.map(({ tim, com, time, no, replies, images }) => (
           <Link

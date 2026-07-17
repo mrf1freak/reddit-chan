@@ -22,7 +22,7 @@ export default async function Home() {
 
   return (
     <div className="w-full p-8">
-      <h1 className="mb-6 text-4xl">Boards</h1>
+      <h1 className="mb-6 text-4xl font-light">Boards</h1>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {boards.map(({ board, title, meta_description }) => (
