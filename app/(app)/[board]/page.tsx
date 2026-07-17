@@ -49,7 +49,7 @@ export default async function Catalog({
   if (!threads) return notFound();
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <h1 className="mb-6 text-4xl font-light">/{board}/</h1>
       <Card className="py-0 gap-0">
         {threads.map(({ tim, com, time, no, replies, images }) => (
@@ -70,10 +70,7 @@ export default async function Catalog({
             )}
 
             <div className="flex w-full flex-col justify-between">
-              <SanitizedHtml
-                html={com || ""}
-                className="font-medium text-foreground group-hover:underline"
-              />
+              <SanitizedHtml html={com || ""} className="text-foreground" />
               <div className="flex flex-row items-end justify-between mt-2">
                 <PostStats post={{ replies, images }} />
                 <RelativeTime

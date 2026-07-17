@@ -35,7 +35,7 @@ export default function Reply({ id, reply, depth, className }: Props) {
     <div className={twMerge("border-t border-border", className)}>
       {/** biome-ignore lint/a11y/useSemanticElements: Nested buttons */}
       <div
-        className="w-full cursor-pointer border-l-4 border-solid p-4 text-left transition-colors hover:bg-accent"
+        className="w-full cursor-pointer border-l-4 border-solid p-4 text-left transition-colors hover:bg-accent @container"
         style={{ borderColor: colorForDepth(depth) }}
         onClick={() => {
           if (hasChildren) setHidden((v) => !v);
@@ -71,8 +71,8 @@ export default function Reply({ id, reply, depth, className }: Props) {
             </span>
           )}
         </div>
-        <div className="flex flex-row">
-          <PostThumbnailImage post={post} board={board} className="mr-4" />
+        <div className="flex @sm:flex-row flex-col gap-4">
+          <PostThumbnailImage post={post} board={board} />
           <SanitizedHtml html={reply} className="whitespace-normal text-sm" />
         </div>
       </div>

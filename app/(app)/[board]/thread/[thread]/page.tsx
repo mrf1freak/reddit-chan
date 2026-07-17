@@ -106,7 +106,7 @@ export default async function Thread({
 
   return (
     <ThreadProvider value={{ posts, replies, board }}>
-      <div className="w-full p-8">
+      <div className="w-full p-4 md:p-8">
         <Breadcrumb className="mb-6">
           <BreadcrumbList>
             <BreadcrumbItem>

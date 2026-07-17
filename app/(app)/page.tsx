@@ -21,10 +21,10 @@ export default async function Home() {
   const boards = await FourChan.boards();
 
   return (
-    <div className="w-full p-8">
+    <div className="w-full p-4 md:p-8 @container">
       <h1 className="mb-6 text-4xl font-light">Boards</h1>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 @lg:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4">
         {boards.map(({ board, title, meta_description }) => (
           <Link href={`/${board}`} key={board} prefetch={false}>
             <Card className="h-full transition-colors hover:bg-accent">
