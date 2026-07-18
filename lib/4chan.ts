@@ -21,6 +21,8 @@ const postSchema = z.object({
   fsize: z.number().optional(),
   replies: z.number().optional(),
   images: z.number().optional(),
+  country: z.string().optional(),
+  country_name: z.string().optional(),
 });
 
 export type Post = z.infer<typeof postSchema>;

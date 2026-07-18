@@ -1,4 +1,5 @@
 "use client";
+import CountryFlag from "components/post/CountryFlag";
 import PostThumbnailImage from "components/post/PostThumbnailImage";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
@@ -58,16 +59,21 @@ export default function Reply({ id, reply, depth, className }: Props) {
               )}
             />
           )}
-          {post.name !== "Anonymous" && `${post.name} - `}
+          {post.name !== "Anonymous" && `${post.name} · `}
           <span className="text-xs">No. {id}</span>
           <span className="text-xs" title={post.now}>
             {" "}
-            - <RelativeTime timestamp={post.time} />
+            · <RelativeTime timestamp={post.time} />
           </span>
           {hidden && (
             <span className="text-xs italic">
               · {children.length} {children.length === 1 ? "reply" : "replies"}{" "}
               hidden
+            </span>
+          )}
+          {post.country && (
+            <span className="flex items-center gap-1">
+              · <CountryFlag code={post.country} name={post.country_name} />
             </span>
           )}
         </div>

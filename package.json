@@ -18,6 +18,7 @@
     "cachios": "^3.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "country-flag-icons": "^1.6.20",
     "date-fns": "^4.4.0",
     "filesize": "^7.0.0",
     "framer-motion": "^4.1.17",
