@@ -7,7 +7,7 @@ export default function AddToRecentThread({
   thread,
   board,
 }: {
-  thread: { no: number; com: string; tim: number };
+  thread: { no: number; com: string; tim?: number };
   board: string;
 }) {
   const { add } = useRecentThreads();

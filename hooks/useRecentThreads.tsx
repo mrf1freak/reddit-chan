@@ -9,7 +9,7 @@ const schema = z
     board: z.string(),
     com: z.string(),
     no: z.number(),
-    tim: z.number(),
+    tim: z.number().optional(),
   })
   .array();
 
@@ -40,7 +40,7 @@ export default function useRecentThreads() {
   );
 
   const add = useCallback(
-    (thread: { no: number; com: string; tim: number }, board: string) => {
+    (thread: { no: number; com: string; tim?: number }, board: string) => {
       setThreads((threads) => {
         const alreadyAdded = threads.some(
           (item) => item.no === thread.no && item.board === board,

@@ -59,7 +59,7 @@ export default async function Catalog({
               href={`/${board}/thread/${no}`}
               prefetch={false}
               className="group flex border-t border-border px-4 items-stretch py-3 transition-colors first:border-t-0 hover:bg-accent"
-              key={tim}
+              key={no}
             >
               {tim && (
                 <FallbackImage

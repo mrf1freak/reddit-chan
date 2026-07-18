@@ -45,7 +45,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroupContent className="flex flex-col gap-2">
             <SidebarMenu>
               {threads.map(({ tim, com, no, board }) => (
-                <SidebarMenuItem key={tim}>
+                <SidebarMenuItem key={no}>
                   <SidebarMenuButton
                     className="h-10 text-xs"
                     render={
@@ -53,12 +53,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     }
                     isActive={pathname === `/${board}/thread/${no}`}
                   >
-                    <FallbackImage
-                      src={postThumbnailLink(board, tim)}
-                      className="shrink-0 size-8 object-cover"
-                      alt="thread thumbnail"
-                      referrerPolicy="no-referrer"
-                    />
+                    {typeof tim !== "undefined" && (
+                      <FallbackImage
+                        src={postThumbnailLink(board, tim)}
+                        className="shrink-0 size-8 object-cover"
+                        alt="thread thumbnail"
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
                     <SanitizedHtml
                       html={com}
                       className="flex-1 truncate flex items-start shrink h-full"

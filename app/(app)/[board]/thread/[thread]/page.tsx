@@ -137,7 +137,7 @@ export default async function Thread({
             thread={{
               com: OP_POST.com || "",
               no: OP_POST.no,
-              tim: OP_POST.tim || 0,
+              tim: OP_POST.tim,
             }}
             board={board}
           />
