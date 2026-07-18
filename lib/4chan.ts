@@ -54,6 +54,11 @@ export const FourChan = {
             tim: z.number().optional(),
             replies: z.number(),
             images: z.number(),
+            name: z.string(),
+            sub: z.string().optional(),
+            sticky: z.number().optional(),
+            closed: z.number().optional(),
+            capcode: z.string().optional(),
           })
           .array(),
       })

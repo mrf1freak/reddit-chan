@@ -1,5 +1,6 @@
 import PostStats from "components/post/PostStats";
 import { FourChan } from "lib/4chan";
+import { Lock, Pin } from "lucide-react";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
@@ -52,35 +53,50 @@ export default async function Catalog({
     <div className="p-4 md:p-8">
       <h1 className="mb-6 text-4xl font-light">/{board}/</h1>
       <Card className="py-0 gap-0">
-        {threads.map(({ tim, com, time, no, replies, images }) => (
-          <Link
-            href={`/${board}/thread/${no}`}
-            prefetch={false}
-            className="group flex border-t border-border px-4 items-stretch py-3 transition-colors first:border-t-0 hover:bg-accent"
-            key={tim}
-          >
-            {tim && (
-              <FallbackImage
-                src={postThumbnailLink(board, tim)}
-                alt=""
-                className="mr-4 w-20 shrink-0 max-h-20 min-h-10 object-cover"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-              />
-            )}
-
-            <div className="flex w-full flex-col justify-between">
-              <SanitizedHtml html={com || ""} className="text-foreground" />
-              <div className="flex flex-row items-end justify-between mt-2">
-                <PostStats post={{ replies, images }} />
-                <RelativeTime
-                  timestamp={time}
-                  className="text-xs text-muted-foreground"
+        {threads.map(
+          ({ tim, com, time, no, replies, images, sub, closed, sticky }) => (
+            <Link
+              href={`/${board}/thread/${no}`}
+              prefetch={false}
+              className="group flex border-t border-border px-4 items-stretch py-3 transition-colors first:border-t-0 hover:bg-accent"
+              key={tim}
+            >
+              {tim && (
+                <FallbackImage
+                  src={postThumbnailLink(board, tim)}
+                  alt=""
+                  className="mr-4 w-20 shrink-0 max-h-20 min-h-10 object-cover"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
+              )}
+
+              <div className="flex w-full flex-col justify-between">
+                <div className="mb-2 flex items-center gap-2">
+                  {sub && <div className="font-semibold">{sub}</div>}
+                  <RelativeTime
+                    timestamp={time}
+                    className="text-xs text-muted-foreground"
+                  />
+                  {sticky && (
+                    <div title="Sticky">
+                      <Pin className="text-blue-800 dark:text-blue-300 size-4" />
+                    </div>
+                  )}
+                  {closed && (
+                    <div title="Closed">
+                      <Lock className="text-blue-800 dark:text-blue-300 size-4" />
+                    </div>
+                  )}
+                </div>
+                <SanitizedHtml html={com || ""} className="text-foreground" />
+                <div className="flex flex-row items-end justify-between mt-2">
+                  <PostStats post={{ replies, images }} />
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ),
+        )}
       </Card>
     </div>
   );
