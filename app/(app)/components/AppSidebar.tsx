@@ -62,8 +62,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       />
                     )}
                     <SanitizedHtml
-                      html={com}
-                      className="flex-1 truncate flex items-start shrink h-full"
+                      html={com.replaceAll("<br>", "")}
+                      className="flex-1 shrink h-full truncate min-w-0"
                     />
                     <button
                       className="hidden group-hover/menu-item:flex text-destructive"
