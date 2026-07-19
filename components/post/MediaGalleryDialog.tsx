@@ -1,5 +1,6 @@
 "use client";
 
+import { getHotkeyHandler } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { postThumbnailLink } from "utils/post";
 import { useThread } from "@/app/(app)/[board]/thread/[thread]/components/ThreadContext";
@@ -26,6 +27,26 @@ export default function MediaGalleryDialog({
   useEffect(() => {
     if (open) setActiveId(initialId);
   }, [open, initialId]);
+
+  useEffect(() => {
+    if (!open) return;
+    const step = (delta: number) => {
+      const ids = media
+        .filter((post) => typeof post.tim !== "undefined")
+        .map((post) => post.no);
+      setActiveId((current) => {
+        const i = ids.indexOf(current);
+        return i === -1 ? current : (ids[i + delta] ?? current);
+      });
+    };
+    const handler = getHotkeyHandler([
+      ["ArrowLeft", () => step(-1)],
+      ["ArrowRight", () => step(1)],
+    ]);
+    // capture phase: fire before the dialog's key handling swallows arrows
+    document.addEventListener("keydown", handler, true);
+    return () => document.removeEventListener("keydown", handler, true);
+  }, [open, media]);
 
   useEffect(() => {
     if (!open) return;
