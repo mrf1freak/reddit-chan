@@ -65,7 +65,7 @@ export const FourChan = {
             tim: z.number().optional(),
             replies: z.number(),
             images: z.number(),
-            name: z.string(),
+            name: z.string().optional(),
             sub: z.string().optional(),
             sticky: z.number().optional(),
             closed: z.number().optional(),
