@@ -1,9 +1,18 @@
 import axios from "axios";
 import { postDictionary, threadReplies } from "utils/parser";
 import z from "zod";
+import { posthog } from "./posthog";
 
 const api = axios.create({
   baseURL: "https://a.4cdn.org/",
+});
+
+api.interceptors.response.use((res) => {
+  posthog.capture({
+    event: "4chan_api_call",
+    properties: { path: res.config.url, status: res.status },
+  });
+  return res;
 });
 
 const postSchema = z.object({
