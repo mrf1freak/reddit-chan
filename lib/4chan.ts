@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cacheLife } from "next/cache";
 import { postDictionary, threadReplies } from "utils/parser";
 import z from "zod";
 import { posthog } from "./posthog";
@@ -38,6 +39,8 @@ export type Post = z.infer<typeof postSchema>;
 
 export const FourChan = {
   async boards() {
+    "use cache";
+    cacheLife("days");
     const { data } = await api.get("boards.json");
     const schema = z.object({
       boards: z.array(
