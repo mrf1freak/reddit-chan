@@ -83,7 +83,12 @@ export default function Reply({ id, reply, depth, className }: Props) {
         </div>
       </div>
       {children.length > 0 && (
-        <div className={cn("ml-6 border-l border-border", hidden && "hidden")}>
+        <div
+          className={cn(
+            "ml-2 sm:ml-6 border-l border-border",
+            hidden && "hidden",
+          )}
+        >
           {children.map((child) => (
             <Reply key={child.id} {...child} depth={depth + 1} />
           ))}
