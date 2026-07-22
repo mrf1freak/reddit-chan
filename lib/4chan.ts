@@ -37,23 +37,24 @@ const postSchema = z.object({
 
 export type Post = z.infer<typeof postSchema>;
 
+async function getBoards() {
+  "use cache";
+  cacheLife("days");
+  const { data } = await api.get("boards.json");
+  const schema = z.object({
+    boards: z.array(
+      z.object({
+        board: z.string(),
+        title: z.string(),
+        meta_description: z.string(),
+      }),
+    ),
+  });
+  return schema.parse(data).boards;
+}
+
 export const FourChan = {
-  async boards() {
-    "use cache";
-    cacheLife("days");
-    const { data } = await api.get("boards.json");
-    const schema = z.object({
-      boards: z.array(
-        z.object({
-          board: z.string(),
-          title: z.string(),
-          meta_description: z.string(),
-        }),
-      ),
-    });
-    const parsed = schema.parse(data);
-    return parsed.boards;
-  },
+  boards: getBoards,
 
   async threads(board: string) {
     const { data } = await api.get(`${board}/catalog.json`);
